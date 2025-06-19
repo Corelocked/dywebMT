@@ -22,7 +22,7 @@ class ScheduleFactory extends Factory
         return [
             'day_of_the_week' => fake()->randomElement(['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']),
             'time_slot' => fake()->time(),
-            'room' => fake()->bothify('Room ###'),
+            'room' => strtoupper(fake()->bothify('Room ###')),
             'term' => fake()->randomElement(['1', '2', '3']),
             'teacher_id' => Teacher::factory()->create()->id,
             'student_id' => Student::factory()->create()->id,

@@ -20,7 +20,7 @@ class CourseFactory extends Factory
             'subject' => fake()->unique()->sentence(3),
             'description' => fake()->paragraph(),
             'credits' => fake()->numberBetween(2, 5),
-            'course_code' => fake()->unique()->bothify('??###'),
+            'course_code' => strtoupper(fake()->unique()->bothify('??###')),
         ];
     }
 }

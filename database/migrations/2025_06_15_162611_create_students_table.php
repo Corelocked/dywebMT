@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('program')->comment('Program of study, e.g., Computer Science');
             $table->string('enrollment_year')->max(4)->comment('Year of enrollment, e.g., 2025');
             $table->dateTime('birth_date')->comment('Date of birth of the student');
+            $table->timestamps();
         });
     }
 
