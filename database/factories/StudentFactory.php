@@ -17,11 +17,11 @@ class StudentFactory extends Factory
     public function definition(): array
     {
         return [
-            'first_name' => fake()->name(),
-            'last_name' => fake()->name(),
-            'birth_date' => fake()->dateTimeBetween('-20 years', '-18 years'),
-            'program' => fake()->randomElement(['Computer Science', 'Mathematics', 'Physics', 'Chemistry']),
-            'enrollment_year' => fake()->year(),
+            'first_name' => collect(fake()->words(fake()->numberBetween(1, 3)))->map(fn($word) => ucfirst($word))->implode(' '),
+            'last_name' => collect(explode(' ', fake()->lastName()))->take(fake()->numberBetween(1, 2))->implode(' '),
+            'birth_date' => fake()->dateTimeBetween('-30 years', '-18 years'),
+            'program' => fake()->randomElement(['BSCS', 'BSEMC', 'BMMA-Animation', 'BMMA-Film', 'BMMA-Graphic Design', 'BSE']),
+            'enrollment_year' => fake()->numberBetween(now()->year - 6, now()->year),
             'user_id' => User::factory(),
         ];
     }

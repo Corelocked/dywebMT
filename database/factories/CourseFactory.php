@@ -17,7 +17,7 @@ class CourseFactory extends Factory
     public function definition(): array
     {
         return [
-            'subject' => fake()->unique()->sentence(3),
+            'subject' => ucwords(fake()->unique()->sentence(3)),
             'description' => fake()->paragraph(),
             'credits' => fake()->numberBetween(2, 5),
             'course_code' => strtoupper(fake()->unique()->bothify('??###')),

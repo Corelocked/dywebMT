@@ -18,11 +18,15 @@ class TeacherFactory extends Factory
     public function definition(): array
     {
         return [
-            'first_name' => fake()->name(),
-            'last_name' => fake()->name(),
-            'email' => fake()->unique()->safeEmail(),
-            'department' => fake()->randomElement(['Math', 'Science', 'History', 'English', 'Art']),
-            'birth_date' => fake()->dateTimeBetween('-50 years', '-20 years'),
+            'first_name' => collect(fake()->words(fake()->numberBetween(1, 3)))->map(fn($word) => ucfirst($word))->implode(' '),
+            'last_name' => collect(explode(' ', fake()->lastName()))->take(fake()->numberBetween(1, 2))->implode(' '),
+            'email' => strtolower(str_replace(' ','',explode(' ', $firstName = collect(fake()->words(fake()->numberBetween(1, 3)))
+                        ->map(fn($word) => ucfirst($word))->implode(' '))[0]. '.' .collect(explode(' ', $lastName = collect(explode(' ', fake()->lastName()))
+                        ->take(fake()->numberBetween(1, 2))->implode(' ')))->last())) . '@ciit.edu.ph',
+            'first_name' => $firstName,
+            'last_name' => $lastName,
+            'department' => fake()->randomElement(['Technology', 'Arts', 'Entrepreneurship', 'Mathematics', 'Science', 'Humanities']),
+            'birth_date' => fake()->dateTimeBetween('-50 years', '-30 years'),
             'user_id' => User::factory(),
         ];
     }

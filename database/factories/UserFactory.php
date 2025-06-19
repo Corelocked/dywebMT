@@ -20,9 +20,13 @@ class UserFactory extends Factory
     public function definition(): array
     {
         return [
-            'first_name' => fake()->name(),
-            'last_name' => fake()->name(),
-            'user_name' => fake()->unique()->safeEmail(),
+            'first_name' => collect(fake()->words(fake()->numberBetween(1, 3)))->map(fn($word) => ucfirst($word))->implode(' '),
+            'last_name' => collect(explode(' ', fake()->lastName()))->take(fake()->numberBetween(1, 2))->implode(' '),
+            'user_name' => strtolower(str_replace(' ','',explode(' ', $firstName = collect(fake()->words(fake()->numberBetween(1, 3)))
+                        ->map(fn($word) => ucfirst($word))->implode(' '))[0]. '.' .collect(explode(' ', $lastName = collect(explode(' ', fake()->lastName()))
+                        ->take(fake()->numberBetween(1, 2))->implode(' ')))->last())) . '@ciit.edu.ph',
+            'first_name' => $firstName,
+            'last_name' => $lastName,
             'password' => static::$password ??= Hash::make('password'),
             'registration_date' => fake()->dateTimeThisYear(),
         ];
